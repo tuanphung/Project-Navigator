@@ -62,6 +62,12 @@ extension UIViewController {
         }
     }
     
+    func ex_setUpComponentsOnLoad() {}
+    func ex_setUpComponentsOnWillAppear() {}
+    func ex_setUpComponentsOnDidAppear() {}
+    func ex_setUpComponentsOnWillDisappear() {}
+    func ex_setUpComponentsOnDidDisappear() {}
+    
     /*
         Manage block to execute when ViewController Life-Cycle is already executed
     */
@@ -124,10 +130,4 @@ extension UIViewController {
         let closure = ExClosure(block: block)
         objc_setAssociatedObject(self, &ExAssociatedOnDidDisappearKey, closure, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
     }
-    
-    func ex_setUpComponentsOnLoad() {}
-    func ex_setUpComponentsOnWillAppear() {}
-    func ex_setUpComponentsOnDidAppear() {}
-    func ex_setUpComponentsOnWillDisappear() {}
-    func ex_setUpComponentsOnDidDisappear() {}
 }

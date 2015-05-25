@@ -60,6 +60,9 @@
 		82ADDC6E1B1366F800C3C664 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ADDC611B1366F800C3C664 /* String.swift */; };
 		82ADDC731B13682C00C3C664 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ADDC711B13682C00C3C664 /* MainViewController.swift */; };
 		82ADDC741B13682C00C3C664 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82ADDC721B13682C00C3C664 /* MainViewController.xib */; };
+		82F3F6F01B136AF80036BCB7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F3F6EF1B136AF80036BCB7 /* MapKit.framework */; };
+		82F3F6F21B136AFD0036BCB7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F3F6F11B136AFD0036BCB7 /* CoreLocation.framework */; };
+		82F3F6F91B137C330036BCB7 /* AppleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F3F6F81B137C330036BCB7 /* AppleMapView.swift */; };
 		A9A3FE23C5DF1C08FAF92340 /* libPods-Project Navigator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 406446278D1A60278F6854D5 /* libPods-Project Navigator.a */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +139,9 @@
 		82ADDC611B1366F800C3C664 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		82ADDC711B13682C00C3C664 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		82ADDC721B13682C00C3C664 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		82F3F6EF1B136AF80036BCB7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		82F3F6F11B136AFD0036BCB7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		82F3F6F81B137C330036BCB7 /* AppleMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +149,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F3F6F21B136AFD0036BCB7 /* CoreLocation.framework in Frameworks */,
+				82F3F6F01B136AF80036BCB7 /* MapKit.framework in Frameworks */,
 				A9A3FE23C5DF1C08FAF92340 /* libPods-Project Navigator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +270,7 @@
 		82ADDB5C1B1364E400C3C664 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				82F3F6F81B137C330036BCB7 /* AppleMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -436,6 +445,8 @@
 		D70D3B71749A8FA86CC6DD81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				82F3F6F11B136AFD0036BCB7 /* CoreLocation.framework */,
+				82F3F6EF1B136AF80036BCB7 /* MapKit.framework */,
 				406446278D1A60278F6854D5 /* libPods-Project Navigator.a */,
 			);
 			name = Frameworks;
@@ -577,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F3F6F91B137C330036BCB7 /* AppleMapView.swift in Sources */,
 				82ADDC2E1B1364E400C3C664 /* ExImageView.swift in Sources */,
 				82ADDC441B1364E400C3C664 /* String+ExKit.swift in Sources */,
 				82ADDC301B1364E400C3C664 /* ExStaticTableView.swift in Sources */,
@@ -694,7 +706,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -732,7 +744,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -748,6 +760,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Project Navigator/Libraries/ObjC-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -760,6 +773,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Project Navigator/Libraries/ObjC-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

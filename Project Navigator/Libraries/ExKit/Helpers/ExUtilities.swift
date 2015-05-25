@@ -55,12 +55,10 @@ class ExUtilities {
         manager.GET(gGeocodingURL, parameters: parameters, success: {
             (operation, response) -> () in
             let json = JSON(response)
-            if let results = json["results"].array {
-                if (results.count > 0) {
-                    let address = results[0]["formatted_address"].string
-                    completion(address: address)
-                    return
-                }
+            if let results = json["results"].array where results.count > 0 {
+                let address = results[0]["formatted_address"].string
+                completion(address: address)
+                return
             }
 
             // else case
@@ -82,16 +80,12 @@ class ExUtilities {
         manager.GET(gGeocodingURL, parameters: parameters, success: {
             (operation, response) -> () in
             let json = JSON(response)
-            if let results = json["results"].array {
-                if (results.count > 0) {
-                    let location = results[0]["geometry"]["location"]
-                    if let lat = location["lat"].double {
-                        if let lng = location["lng"].double {
-                            var coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-                            completion(coordinate: coordinate)
-                            return
-                        }
-                    }
+            if let results = json["results"].array where results.count > 0 {
+                let location = results[0]["geometry"]["location"]
+                if let lat = location["lat"].double, lng = location["lng"].double {
+                    var coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                    completion(coordinate: coordinate)
+                    return
                 }
             }
             // else case

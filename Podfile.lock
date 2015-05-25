@@ -1,0 +1,44 @@
+PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - LoremIpsum (1.0.0)
+  - MBProgressHUD (0.9)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
+  - SPGooglePlacesAutocomplete (1.0.4)
+
+DEPENDENCIES:
+  - AFNetworking (= 2.4.1)
+  - LoremIpsum (= 1.0.0)
+  - MBProgressHUD (= 0.9)
+  - SDWebImage (= 3.7.1)
+  - SPGooglePlacesAutocomplete (= 1.0.4)
+
+SPEC CHECKSUMS:
+  AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
+  LoremIpsum: 9029c55d36501b2ee0b05cc9ecda11d3a0479160
+  MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  SPGooglePlacesAutocomplete: ed6b50bec1ea0c3382a1812990d7c7e2551822f2
+
+COCOAPODS: 0.34.4
