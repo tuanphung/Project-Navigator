@@ -43,34 +43,48 @@ class AppleMapView: MKMapView {
         }
     }
     
-    private func setCenterCoordinate(coordinate: CLLocationCoordinate2D, zoomLevel: Int, animated: Bool){
+    func setCenterCoordinate(coordinate: CLLocationCoordinate2D, zoomLevel: Int, animated: Bool){
         let span = MKCoordinateSpanMake(0, 360 / pow(2, Double(zoomLevel)) * Double(self.frame.size.width) / 256)
-        setRegion(MKCoordinateRegionMake(centerCoordinate, span), animated: animated)
+        setRegion(MKCoordinateRegionMake(coordinate, span), animated: animated)
     }
     
     //MARK: Handle long press on map to drop a pin
     func longPressHandle(recognizer: UILongPressGestureRecognizer) {
         if (recognizer.state == UIGestureRecognizerState.Began) {
-            // Remove previous dropped pin
-            self.removeAnnotation(self.droppedPointAnnotation)
-            
             // Convert touch point on screen to coordinate system
             var touchPoint = recognizer.locationInView(self)
             var touchCoordinate = self.convertPoint(touchPoint, toCoordinateFromView: self)
             
-            // Re-allocated <droppedPointAnnotation>
-            self.droppedPointAnnotation = MKPointAnnotation()
-            self.droppedPointAnnotation.coordinate = touchCoordinate
-            self.addAnnotation(self.droppedPointAnnotation)
-            
+            self.dropNewPin(touchCoordinate, address: nil)
+        }
+    }
+    
+    func dropNewPin(coordinate: CLLocationCoordinate2D, address: String?, autoShowDirection: Bool! = false) {
+        // Remove previous dropped pin
+        self.removeAnnotation(self.droppedPointAnnotation)
+        
+        // Re-allocated <droppedPointAnnotation>
+        self.droppedPointAnnotation = MKPointAnnotation()
+        self.droppedPointAnnotation.coordinate = coordinate
+        self.addAnnotation(self.droppedPointAnnotation)
+        
+        if let _address = address {
+            self.droppedPointAnnotation.title = address
+            self.selectAnnotation(self.droppedPointAnnotation, animated: true)
+        }
+        else {
             // Allow user drop another pin while previous pin is being decoded
             // <weak annotation> will be turned to nil if <droppedPointAnnotation> is re-allocated
-            ExUtilities.addressFromCoordinate(touchCoordinate, completion: { [weak annotation = self.droppedPointAnnotation] (address) -> () in
+            GGApi.addressFromCoordinate(coordinate, completion: { [weak annotation = self.droppedPointAnnotation] (address) -> () in
                 if let _annotation = annotation {
                     _annotation.title = address
                     self.selectAnnotation(_annotation, animated: true)
                 }
-            })
+                })
+        }
+        
+        if autoShowDirection == true {
+            
         }
     }
 }
@@ -98,17 +112,18 @@ extension AppleMapView: MKMapViewDelegate {
         
         // Zoom and center the map to user location if it's the first coordinate
         if self.firstTimeLoaded {
+            self.firstTimeLoaded = false
             self.centerCoordinate = userLocation.location.coordinate
             self.zoomLevel = self.defaultZoomLevel
             
-            ExUtilities.addressFromCoordinate(mapView.centerCoordinate, completion: { [weak annotation = userLocation] (address) -> () in
+            GGApi.addressFromCoordinate(mapView.centerCoordinate, completion: { [weak annotation = userLocation] (address) -> () in
                 annotation?.title = address
                 self.selectAnnotation(annotation, animated: true)
             })
         }
         else {
             // Just update address from new user location if it's not the first coordinate
-            ExUtilities.addressFromCoordinate(mapView.centerCoordinate, completion: { [weak annotation = userLocation] (address) -> () in
+            GGApi.addressFromCoordinate(mapView.centerCoordinate, completion: { [weak annotation = userLocation] (address) -> () in
                 annotation?.title = address
             })
         }

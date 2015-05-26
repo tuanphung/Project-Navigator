@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820D26F21B14E2740041DFC3 /* GGApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D26F11B14E2740041DFC3 /* GGApi.swift */; };
 		824D56241B136374008343C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824D56231B136374008343C7 /* AppDelegate.swift */; };
 		824D56271B136374008343C7 /* Project_Navigator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 824D56251B136374008343C7 /* Project_Navigator.xcdatamodeld */; };
 		824D56311B136374008343C7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824D562F1B136374008343C7 /* LaunchScreen.xib */; };
@@ -80,6 +81,7 @@
 		083AB598A9A4696D34643B65 /* Pods-Project Navigator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project Navigator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project Navigator/Pods-Project Navigator.debug.xcconfig"; sourceTree = "<group>"; };
 		406446278D1A60278F6854D5 /* libPods-Project Navigator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Project Navigator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6921BB1C516830F27CAB34 /* Pods-Project Navigator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project Navigator.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project Navigator/Pods-Project Navigator.release.xcconfig"; sourceTree = "<group>"; };
+		820D26F11B14E2740041DFC3 /* GGApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GGApi.swift; sourceTree = "<group>"; };
 		824D561E1B136374008343C7 /* Project Navigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Navigator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		824D56221B136374008343C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		824D56231B136374008343C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				82ADDAFF1B1364E400C3C664 /* Utilities+Extension.swift */,
+				820D26F11B14E2740041DFC3 /* GGApi.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				82ADDC2F1B1364E400C3C664 /* ExLabel.swift in Sources */,
 				82ADDC291B1364E400C3C664 /* ExAlertManager.swift in Sources */,
 				82ADDC691B1366F800C3C664 /* Int.swift in Sources */,
+				820D26F21B14E2740041DFC3 /* GGApi.swift in Sources */,
 				82ADDC261B1364E400C3C664 /* ExTabBarController.swift in Sources */,
 				82ADDC491B1364E400C3C664 /* UIViewController+ExKit.swift in Sources */,
 				82ADDC4A1B1364E400C3C664 /* UIFont+HelveticaNeue.swift in Sources */,

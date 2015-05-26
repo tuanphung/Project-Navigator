@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         self.mainNavigationController = UINavigationController(rootViewController: MainViewController.ex_defaultInstance())
+        self.mainNavigationController.navigationBar.translucent = false
         
         self.window?.rootViewController = self.mainNavigationController
         self.window?.makeKeyAndVisible()
