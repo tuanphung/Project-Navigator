@@ -108,7 +108,7 @@ extension MainViewController: UISearchBarDelegate {
         
         GGApi.coordinateFromAddress(address, completion: { (coordinate) -> () in
             if let _coordinate = coordinate {
-                self.mapView.dropNewPin(_coordinate, address: address)
+                self.mapView.dropNewPin(_coordinate, address: address, autoShowDirection: true)
                 self.mapView.setCenterCoordinate(_coordinate, zoomLevel: self.mapView.zoomLevel, animated: true)
             }
         })

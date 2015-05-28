@@ -16,3 +16,5 @@
 
 #import "UIImageView+WebCache.h"
 #import "SPGooglePlacesAutocomplete.h"
+
+#import <GoogleMaps/GoogleMaps.h>

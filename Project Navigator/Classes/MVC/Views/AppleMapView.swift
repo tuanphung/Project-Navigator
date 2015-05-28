@@ -11,7 +11,16 @@ import MapKit
 
 class AppleMapView: MKMapView {
     var locationManager = CLLocationManager()
+    
     var droppedPointAnnotation = MKPointAnnotation()
+    
+    // Use to mark
+    var startPointAnnotation = MKPointAnnotation()
+    var directionPath = MKPolyline()
+    
+    // Region to display travel time from 2 coordinates
+    var bottomView: UIView!
+    var travelTimeLabel: UILabel!
     
     var defaultZoomLevel = 15
     var firstTimeLoaded = true
@@ -55,7 +64,7 @@ class AppleMapView: MKMapView {
             var touchPoint = recognizer.locationInView(self)
             var touchCoordinate = self.convertPoint(touchPoint, toCoordinateFromView: self)
             
-            self.dropNewPin(touchCoordinate, address: nil)
+            self.dropNewPin(touchCoordinate, address: nil, autoShowDirection: true)
         }
     }
     
@@ -76,16 +85,59 @@ class AppleMapView: MKMapView {
             // Allow user drop another pin while previous pin is being decoded
             // <weak annotation> will be turned to nil if <droppedPointAnnotation> is re-allocated
             GGApi.addressFromCoordinate(coordinate, completion: { [weak annotation = self.droppedPointAnnotation] (address) -> () in
-                if let _annotation = annotation {
-                    _annotation.title = address
+                if let _annotation = annotation, let _address = address {
+                    _annotation.title = _address
                     self.selectAnnotation(_annotation, animated: true)
                 }
-                })
+                else {
+                    ExAlertManager.show("Error", message: "Could not find address", cancelButtonTitle: "OK", otherButtonTitles: nil, handler: nil)
+                }
+            })
         }
         
         if autoShowDirection == true {
-            
+            self.showDirectionFrom(self.userLocation.coordinate, toCoordinate: coordinate)
         }
+    }
+    
+    func showDirectionFrom(fromCoordinate: CLLocationCoordinate2D, toCoordinate: CLLocationCoordinate2D) {
+        if (fromCoordinate.latitude == 0 && fromCoordinate.longitude == 0) ||
+            toCoordinate.latitude == 0 && toCoordinate.longitude == 0 { return }
+        
+        GGApi.getDirectionFrom(fromCoordinate, toCoordinate: toCoordinate) { (direction) -> () in
+            if let _direction = direction {
+                self.removeAnnotation(self.startPointAnnotation)
+                self.removeOverlay(self.directionPath)
+                
+                self.startPointAnnotation = MKPointAnnotation()
+                self.startPointAnnotation.coordinate = fromCoordinate
+                self.addAnnotation(self.startPointAnnotation)
+                
+                self.directionPath = MKPolyline(coordinates: &_direction.points, count: _direction.points.count)
+                self.addOverlay(self.directionPath)
+                
+                self.setVisibleMapRect(self.directionPath.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 50, right: 20), animated: true)
+                
+                self.showTravelTime(_direction)
+            }
+            else {
+                ExAlertManager.show("Error", message: "Could not find direction", cancelButtonTitle: "OK", otherButtonTitles: nil, handler: nil)
+            }
+        }
+    }
+    
+    func showTravelTime(direction: GGDirection) {
+        if (self.bottomView == nil) {
+            self.bottomView = UIView(frame: CGRect(x: 0, y: self.bounds.size.height - 50, width: self.bounds.size.width, height: 50))
+            self.bottomView.backgroundColor = UIColor.whiteColor()
+            self.addSubview(self.bottomView)
+            
+            self.travelTimeLabel = UILabel(frame: self.bottomView.bounds)
+            self.travelTimeLabel.textAlignment = .Center
+            self.bottomView.addSubview(self.travelTimeLabel)
+        }
+        
+        self.travelTimeLabel.text = ExUtilities.timeFormatFromSeconds(direction.duration)
     }
 }
 
@@ -105,6 +157,20 @@ extension AppleMapView: MKMapViewDelegate {
         return nil
     }
     
+    // Draw Direction Path
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if overlay.isKindOfClass(MKPolyline.self) {
+            var polylineView = MKPolylineRenderer(overlay: overlay)
+            polylineView.fillColor = UIColor.blueColor()
+            polylineView.strokeColor = UIColor.blueColor()
+            polylineView.lineWidth = 4
+            polylineView.alpha = 0.5
+            return polylineView
+        }
+        return nil
+    }
+    
+    // Handle Location Changed
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
         NSLog("MapView didUpdateUserLocation: \(userLocation.location.coordinate)")
         
