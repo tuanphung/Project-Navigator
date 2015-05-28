@@ -25,7 +25,9 @@ class MainViewController: ExViewController {
     }
     
     func setUpNavigationBar() {
-        self.searchBar = UISearchBar(frame: CGRectInset(self.view.bounds, 16, 0))
+        var windowBounds = AppDelegate.sharedInstance().window!.bounds
+        
+        self.searchBar = UISearchBar(frame: CGRectInset(windowBounds, 16, 0))
         self.searchBar.placeholder = "Search by address"
         self.searchBar.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         self.searchBar.delegate = self

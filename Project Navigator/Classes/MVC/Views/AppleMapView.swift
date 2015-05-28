@@ -12,10 +12,13 @@ import MapKit
 class AppleMapView: MKMapView {
     var locationManager = CLLocationManager()
     
+    // Keep current dropped pin
     var droppedPointAnnotation = MKPointAnnotation()
     
-    // Use to mark
+    // Use to mark start_location
     var startPointAnnotation = MKPointAnnotation()
+    
+    // Keep current direction path
     var directionPath = MKPolyline()
     
     // Region to display travel time from 2 coordinates
@@ -23,7 +26,8 @@ class AppleMapView: MKMapView {
     var travelTimeLabel: UILabel!
     
     var defaultZoomLevel = 15
-    var firstTimeLoaded = true
+    
+    var isFirstUserLocation = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -177,8 +181,9 @@ extension AppleMapView: MKMapViewDelegate {
         if (!userLocation.updating) { return }
         
         // Zoom and center the map to user location if it's the first coordinate
-        if self.firstTimeLoaded {
-            self.firstTimeLoaded = false
+        if self.isFirstUserLocation {
+            self.isFirstUserLocation = false
+            
             self.centerCoordinate = userLocation.location.coordinate
             self.zoomLevel = self.defaultZoomLevel
             
